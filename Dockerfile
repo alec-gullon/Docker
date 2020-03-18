@@ -3,6 +3,8 @@ FROM composer:latest
 WORKDIR /app
 COPY . /app
 RUN composer install
+RUN cp .env.example .env
+RUN php artisan key:generate
 
 EXPOSE 80
 

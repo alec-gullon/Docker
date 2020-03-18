@@ -8,3 +8,16 @@ before_install:
   
 script:
   - docker run laravel ./vendor/bin/phpunit
+  
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "docker-laravel"
+  env: "DockerLaravel-env"
+  bucket_name: "elasticbeanstalk-us-east-2-236024735524"
+  bucket_path: "docker-laravel"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
+  
