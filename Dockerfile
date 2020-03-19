@@ -5,7 +5,8 @@ RUN npm install
 RUN npm run prod
 
 FROM composer:latest
-COPY --from=assets /app /app
+COPY . /app
+COPY --from=assets /app/public/css /app/public/css
 
 WORKDIR /app
 
