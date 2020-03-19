@@ -4,7 +4,7 @@ services:
   - docker
   
 before_install:
-  - docker build -t laravel -f Dockerfile .
+  - docker build -t laravel -f Dockerfile.dev .
   
 script:
   - docker run laravel ./vendor/bin/phpunit
