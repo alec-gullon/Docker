@@ -7,7 +7,7 @@ before_install:
   - docker build -t alecgullon/laravel-test -f ./docker/laravel/Dockerfile.dev .
   
 script:
-  - docker run alecgullon/laravel-test ls
+  - docker run alecgullon/laravel-test ./vendor/bin/phpunit
 
 after_install:
   - docker build -t alecgullon/laravel -f ./docker/laravel/Dockerfile
