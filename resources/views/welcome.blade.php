@@ -43,6 +43,22 @@
                     <a href="https://vapor.laravel.com">Vapor</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+				
+				<div class="title m-b-md">
+					Foos
+				</div>
+				
+				@foreach (App\Foo::all() as $foo)
+					{{ $foo->value }} <br/>
+				@endforeach
+				
+				<form method="POST" action="/foo/add/">
+					{{ csrf_field() }}
+				
+					<input type="text" name="foo" value="foobar" />
+					
+					<input type="submit" value="Add" />
+				</form>
             </div>
         </div>
     </body>

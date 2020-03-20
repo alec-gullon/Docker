@@ -4,20 +4,14 @@ services:
   - docker
   
 before_install:
-  - docker build -t laravel -f Dockerfile.dev .
+  - docker build -t alecgullon/laravel -f ./docker/laravel/Dockerfile.dev ./docker/laravel
   
 script:
   - docker run laravel ./vendor/bin/phpunit
-  
-deploy:
-  provider: elasticbeanstalk
-  region: "us-east-2"
-  app: "docker-laravel"
-  env: "DockerLaravel-env"
-  bucket_name: "elasticbeanstalk-us-east-2-236024735524"
-  bucket_path: "docker-laravel"
-  on:
-    branch: master
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  
+
+after_install:
+  - docker build -t alecgullon/laravel ./docker/laravel
+  - docker build -t alecgullon/mysql ./docker/mysql
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push alecgullon/laravel
+  - docker push alecgullon/mysql

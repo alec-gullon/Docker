@@ -20,3 +20,11 @@ Route::get('/', function () {
 Route::get('/page', function () {
 	return 'Page content!';
 });
+
+Route::post('/foo/add', function () {
+	$foo = new App\Foo();
+	$foo->value = request()->foo;
+	$foo->save();
+	
+	return redirect('/');
+});
