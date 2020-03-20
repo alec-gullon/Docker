@@ -48,17 +48,21 @@
 					Foos
 				</div>
 				
-				@foreach (App\Foo::all() as $foo)
-					{{ $foo->value }} <br/>
-				@endforeach
+				@if (false)
 				
-				<form method="POST" action="/foo/add/">
-					{{ csrf_field() }}
-				
-					<input type="text" name="foo" value="foobar" />
+					@foreach (App\Foo::all() as $foo)
+						{{ $foo->value }} <br/>
+					@endforeach
 					
-					<input type="submit" value="Add" />
-				</form>
+					<form method="POST" action="/foo/add/">
+						{{ csrf_field() }}
+					
+						<input type="text" name="foo" value="foobar" />
+						
+						<input type="submit" value="Add" />
+					</form>
+				
+				@endif
             </div>
         </div>
     </body>
