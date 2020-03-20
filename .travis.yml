@@ -4,14 +4,14 @@ services:
   - docker
   
 before_install:
-  - docker build -t alecgullon/laravel -f ./docker/laravel/Dockerfile.dev ./docker/laravel
+  - docker build -t alecgullon/laravel -f ./docker/laravel/Dockerfile.dev .
   
 script:
   - docker run laravel ./vendor/bin/phpunit
 
 after_install:
-  - docker build -t alecgullon/laravel ./docker/laravel
-  - docker build -t alecgullon/mysql ./docker/mysql
+  - docker build -t alecgullon/laravel -f ./docker/laravel/Dockerfile
+  - docker build -t alecgullon/mysql -f ./docker/mysql/Dockerfile
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push alecgullon/laravel
   - docker push alecgullon/mysql
